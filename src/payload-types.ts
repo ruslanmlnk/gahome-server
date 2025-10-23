@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +78,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -147,7 +149,7 @@ export interface User {
  */
 export interface Media {
   id: number;
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -159,6 +161,67 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  meta?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+  };
+  content?:
+    | (
+        | {
+            /**
+             * Заголовок сторінки
+             */
+            title: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'title';
+          }
+        | {
+            /**
+             * Параграф тексту
+             */
+            paragraph?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'paragraph';
+          }
+        | {
+            /**
+             * Текстове поле
+             */
+            text?: string | null;
+            /**
+             * Файл (будь-який)
+             */
+            file?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textWithFile';
+          }
+        | {
+            /**
+             * Зображення
+             */
+            image: number | Media;
+            /**
+             * Alt текст для зображення
+             */
+            alt?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'image';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -174,6 +237,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -256,6 +323,54 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  meta?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+      };
+  content?:
+    | T
+    | {
+        title?:
+          | T
+          | {
+              title?: T;
+              id?: T;
+              blockName?: T;
+            };
+        paragraph?:
+          | T
+          | {
+              paragraph?: T;
+              id?: T;
+              blockName?: T;
+            };
+        textWithFile?:
+          | T
+          | {
+              text?: T;
+              file?: T;
+              id?: T;
+              blockName?: T;
+            };
+        image?:
+          | T
+          | {
+              image?: T;
+              alt?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
