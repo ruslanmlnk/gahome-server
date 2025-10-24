@@ -13,6 +13,9 @@ const generateSlug = (str?: string) =>
 
 const Pages: CollectionConfig = {
   slug: 'pages',
+  access: {
+    read: () => true,
+  },
   labels: {
     singular: 'Page',
     plural: 'Pages',
@@ -71,6 +74,13 @@ const Pages: CollectionConfig = {
               type: 'textarea',
               admin: { description: 'Параграф тексту' },
             },
+            {
+              name: 'strong',
+              type: 'checkbox',
+              label: 'Strong',
+              defaultValue: false,
+              admin: { description: 'Позначте, щоб зробити параграф жирнішим (font-medium)' },
+            },
           ],
         },
         {
@@ -105,6 +115,18 @@ const Pages: CollectionConfig = {
               name: 'alt',
               type: 'text',
               admin: { description: 'Alt текст для зображення' },
+            },
+          ],
+        },
+        {
+          slug: 'readMore',
+          labels: { singular: 'Read more marker', plural: 'Read more markers' },
+          fields: [
+            {
+              name: 'label',
+              type: 'text',
+              admin: { description: 'Текст кнопки (наприклад: Read more / Read less)' },
+              defaultValue: 'Read more',
             },
           ],
         },

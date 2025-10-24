@@ -172,6 +172,10 @@ export interface Page {
     metaTitle?: string | null;
     metaDescription?: string | null;
   };
+  /**
+   * URI slug (генерується з metaTitle, можна редагувати вручну)
+   */
+  slug: string;
   content?:
     | (
         | {
@@ -188,6 +192,10 @@ export interface Page {
              * Параграф тексту
              */
             paragraph?: string | null;
+            /**
+             * Позначте, щоб зробити параграф жирнішим (font-medium)
+             */
+            strong?: boolean | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'paragraph';
@@ -217,6 +225,15 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'image';
+          }
+        | {
+            /**
+             * Текст кнопки (наприклад: Read more / Read less)
+             */
+            label?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'readMore';
           }
       )[]
     | null;
@@ -335,6 +352,7 @@ export interface PagesSelect<T extends boolean = true> {
         metaTitle?: T;
         metaDescription?: T;
       };
+  slug?: T;
   content?:
     | T
     | {
@@ -349,6 +367,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               paragraph?: T;
+              strong?: T;
               id?: T;
               blockName?: T;
             };
@@ -365,6 +384,13 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               image?: T;
               alt?: T;
+              id?: T;
+              blockName?: T;
+            };
+        readMore?:
+          | T
+          | {
+              label?: T;
               id?: T;
               blockName?: T;
             };
