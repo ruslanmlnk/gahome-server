@@ -2,15 +2,6 @@ import type { CollectionConfig } from 'payload'
 import { seoFields } from '../fields/seo'
 
 
-const generateSlug = (str?: string) =>
-  (str || '')
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-
 const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
@@ -20,34 +11,71 @@ const Pages: CollectionConfig = {
     singular: 'Page',
     plural: 'Pages',
   },
-   hooks: {
-   beforeValidate: [
-     async ({ data }) => {
-       const metaTitle =
-         data?.metaTitle ||
-         data?.seo?.metaTitle ||
-         data?.seoFields?.metaTitle ||
-         data?.seo_data?.metaTitle
-
-       if (metaTitle && !data.slug) {
-         data.slug = generateSlug(metaTitle)
-       }
-
-       return data
-     },
-   ],
- },
   fields: [
     seoFields,
     {
-     name: 'slug',
-     type: 'text',
-     unique: true,
-     required: true,
-     admin: {
-       description: 'URI slug (генерується з metaTitle, можна редагувати вручну)',
-     },
-   },
+      name: 'main_title',
+      type: 'text',
+      required: false,
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      unique: true,
+      required: true,
+    },
+    {
+      name: 'hero_image',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+      admin: { description: 'Главная картинка' },
+    },
+    {
+      name: 'gridcont',
+      type: 'array',
+      labels: { singular: 'Card', plural: 'Cards' },
+      fields: [
+        { name: 'title', type: 'text', required: true },
+        { name: 'description', type: 'textarea' },
+      ],
+    },
+    {
+      name: 'file_download',
+      type: 'group',
+      fields: [
+        {
+          name: 'text',
+          type: 'text',
+          admin: { description: 'Текстове поле' },
+        },
+        {
+          name: 'file',
+          type: 'upload',
+          relationTo: 'media',
+        },
+      ],
+    },
+
+        {
+          name: 'videos',
+          type: 'array',
+          labels: { singular: 'Video item', plural: 'Video items' },
+          fields: [
+            {
+              name: 'poster',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+            {
+              name: 'video_file',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+          ],
+        },
     {
       name: 'content',
       type: 'blocks',
@@ -80,41 +108,6 @@ const Pages: CollectionConfig = {
               label: 'Strong',
               defaultValue: false,
               admin: { description: 'Позначте, щоб зробити параграф жирнішим (font-medium)' },
-            },
-          ],
-        },
-        {
-          slug: 'textWithFile',
-          labels: { singular: 'Text File block', plural: 'Text Files' },
-          fields: [
-            {
-              name: 'text',
-              type: 'text',
-              admin: { description: 'Текстове поле' },
-            },
-            {
-              name: 'file',
-              type: 'upload',
-              relationTo: 'media',
-              admin: { description: 'Файл (будь-який)' },
-            },
-          ],
-        },
-         {
-          slug: 'image',
-          labels: { singular: 'Image block', plural: 'Images' },
-          fields: [
-            {
-              name: 'image',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-              admin: { description: 'Зображення' },
-            },
-            {
-              name: 'alt',
-              type: 'text',
-              admin: { description: 'Alt текст для зображення' },
             },
           ],
         },

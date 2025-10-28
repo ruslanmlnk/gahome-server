@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    leads: Lead;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +80,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    leads: LeadsSelect<false> | LeadsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -172,10 +174,33 @@ export interface Page {
     metaTitle?: string | null;
     metaDescription?: string | null;
   };
-  /**
-   * URI slug (генерується з metaTitle, можна редагувати вручну)
-   */
+  main_title?: string | null;
   slug: string;
+  /**
+   * Главная картинка
+   */
+  hero_image?: (number | null) | Media;
+  gridcont?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  file_download?: {
+    /**
+     * Текстове поле
+     */
+    text?: string | null;
+    file?: (number | null) | Media;
+  };
+  videos?:
+    | {
+        poster: number | Media;
+        video_file: number | Media;
+        id?: string | null;
+      }[]
+    | null;
   content?:
     | (
         | {
@@ -202,32 +227,6 @@ export interface Page {
           }
         | {
             /**
-             * Текстове поле
-             */
-            text?: string | null;
-            /**
-             * Файл (будь-який)
-             */
-            file?: (number | null) | Media;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'textWithFile';
-          }
-        | {
-            /**
-             * Зображення
-             */
-            image: number | Media;
-            /**
-             * Alt текст для зображення
-             */
-            alt?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'image';
-          }
-        | {
-            /**
              * Текст кнопки (наприклад: Read more / Read less)
              */
             label?: string | null;
@@ -237,6 +236,19 @@ export interface Page {
           }
       )[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leads".
+ */
+export interface Lead {
+  id: number;
+  fullName: string;
+  email: string;
+  phone?: string | null;
+  message?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -258,6 +270,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'leads';
+        value: number | Lead;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -352,7 +368,29 @@ export interface PagesSelect<T extends boolean = true> {
         metaTitle?: T;
         metaDescription?: T;
       };
+  main_title?: T;
   slug?: T;
+  hero_image?: T;
+  gridcont?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  file_download?:
+    | T
+    | {
+        text?: T;
+        file?: T;
+      };
+  videos?:
+    | T
+    | {
+        poster?: T;
+        video_file?: T;
+        id?: T;
+      };
   content?:
     | T
     | {
@@ -371,22 +409,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        textWithFile?:
-          | T
-          | {
-              text?: T;
-              file?: T;
-              id?: T;
-              blockName?: T;
-            };
-        image?:
-          | T
-          | {
-              image?: T;
-              alt?: T;
-              id?: T;
-              blockName?: T;
-            };
         readMore?:
           | T
           | {
@@ -395,6 +417,18 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leads_select".
+ */
+export interface LeadsSelect<T extends boolean = true> {
+  fullName?: T;
+  email?: T;
+  phone?: T;
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -440,6 +474,36 @@ export interface Home {
     metaTitle?: string | null;
     metaDescription?: string | null;
   };
+  gridSection: {
+    item1: {
+      title: string;
+      image: number | Media;
+    };
+    item2: {
+      title: string;
+      image: number | Media;
+    };
+    item3: {
+      title: string;
+      image: number | Media;
+    };
+    item4: {
+      title: string;
+      image: number | Media;
+    };
+    item5: {
+      title: string;
+      image: number | Media;
+    };
+    item6: {
+      title: string;
+      image: number | Media;
+    };
+    item7: {
+      title: string;
+      image: number | Media;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -453,6 +517,52 @@ export interface HomeSelect<T extends boolean = true> {
     | {
         metaTitle?: T;
         metaDescription?: T;
+      };
+  gridSection?:
+    | T
+    | {
+        item1?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+            };
+        item2?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+            };
+        item3?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+            };
+        item4?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+            };
+        item5?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+            };
+        item6?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+            };
+        item7?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
