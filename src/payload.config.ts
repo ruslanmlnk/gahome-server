@@ -16,8 +16,12 @@ import { Home } from './globals/Home'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export default buildConfig({
-  serverURL: process.env.SERVER_URL || 'http://admin.homegudzdesign.com',
+  serverURL:
+    process.env.SERVER_URL ||
+    (isProduction ? 'https://admin.homegudzdesign.com' : 'http://localhost:3000'),
   cors: ['http://localhost:3000', 'https://homegudzdesign.com', 'https://www.homegudzdesign.com', 'https://admin.homegudzdesign.com'],
   csrf: ['http://localhost:3000', 'https://homegudzdesign.com', 'https://www.homegudzdesign.com', 'https://admin.homegudzdesign.com'],
   admin: {
