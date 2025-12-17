@@ -18,6 +18,8 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   serverURL: process.env.SERVER_URL || 'http://admin.homegudzdesign.com',
+  cors: ['http://localhost:3000', 'https://homegudzdesign.com', 'https://www.homegudzdesign.com', 'https://admin.homegudzdesign.com'],
+  csrf: ['http://localhost:3000', 'https://homegudzdesign.com', 'https://www.homegudzdesign.com', 'https://admin.homegudzdesign.com'],
   admin: {
     user: Users.slug,
     importMap: {
