@@ -112,6 +112,18 @@ const Pages: CollectionConfig = {
           ],
         },
         {
+          slug: 'disclaimer',
+          labels: { singular: 'Disclaimer', plural: 'Disclaimers' },
+          fields: [
+            {
+              name: 'text',
+              type: 'textarea',
+              required: true,
+              admin: { description: 'Disclaimer text to show in the Read more area' },
+            },
+          ],
+        },
+        {
           slug: 'readMore',
           labels: { singular: 'Read more marker', plural: 'Read more markers' },
           fields: [

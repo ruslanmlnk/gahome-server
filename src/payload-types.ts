@@ -227,6 +227,15 @@ export interface Page {
           }
         | {
             /**
+             * Disclaimer text to show in the Read more area
+             */
+            text: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'disclaimer';
+          }
+        | {
+            /**
              * Текст кнопки (наприклад: Read more / Read less)
              */
             label?: string | null;
@@ -406,6 +415,13 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               paragraph?: T;
               strong?: T;
+              id?: T;
+              blockName?: T;
+            };
+        disclaimer?:
+          | T
+          | {
+              text?: T;
               id?: T;
               blockName?: T;
             };
