@@ -218,7 +218,7 @@ export interface Page {
           }
         | {
             /**
-             * Параграф тексту
+             * Параграф тексту. Можна використовувати HTML-теги, наприклад <strong>, <em>, <br>, <a>.
              */
             paragraph?: string | null;
             /**
@@ -228,6 +228,20 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'paragraph';
+          }
+        | {
+            /**
+             * Add one or more images. On desktop they render up to 3 in a row.
+             */
+            items?:
+              | {
+                  image: number | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageGallery';
           }
         | {
             /**
@@ -420,6 +434,18 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               paragraph?: T;
               strong?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imageGallery?:
+          | T
+          | {
+              items?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

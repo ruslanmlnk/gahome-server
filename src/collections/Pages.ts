@@ -100,7 +100,7 @@ const Pages: CollectionConfig = {
             {
               name: 'paragraph',
               type: 'textarea',
-              admin: { description: 'Параграф тексту' },
+              admin: { description: 'Параграф тексту. Можна використовувати HTML-теги, наприклад <strong>, <em>, <br>, <a>.' },
             },
             {
               name: 'strong',
@@ -108,6 +108,30 @@ const Pages: CollectionConfig = {
               label: 'Strong',
               defaultValue: false,
               admin: { description: 'Позначте, щоб зробити параграф жирнішим (font-medium)' },
+            },
+          ],
+        },
+        {
+          slug: 'imageGallery',
+          labels: { singular: 'Image gallery', plural: 'Image galleries' },
+          fields: [
+            {
+              name: 'items',
+              label: 'Images',
+              type: 'array',
+              minRows: 1,
+              fields: [
+                {
+                  name: 'image',
+                  label: 'Image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+              ],
+              admin: {
+                description: 'Add one or more images. On desktop they render up to 3 in a row.',
+              },
             },
           ],
         },
