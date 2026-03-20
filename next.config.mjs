@@ -8,6 +8,19 @@ const __dirname = path.dirname(__filename)
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Your Next.js config here
+  async headers() {
+    return [
+      {
+        source: '/media/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2678400, stale-while-revalidate=86400',
+          },
+        ],
+      },
+    ]
+  },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
