@@ -152,6 +152,10 @@ export interface User {
 export interface Media {
   id: number;
   alt?: string | null;
+  /**
+   * Select the poster image used for video previews.
+   */
+  videoPoster?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -354,6 +358,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  videoPoster?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -493,31 +498,63 @@ export interface Home {
   gridSection: {
     item1: {
       title: string;
+      /**
+       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       */
       image: number | Media;
     };
     item2: {
       title: string;
+      /**
+       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       */
       image: number | Media;
     };
     item3: {
       title: string;
+      /**
+       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       */
       image: number | Media;
     };
     item4: {
       title: string;
+      /**
+       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       */
       image: number | Media;
     };
     item5: {
       title: string;
+      /**
+       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       */
       image: number | Media;
     };
     item6: {
       title: string;
+      /**
+       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       */
       image: number | Media;
     };
     item7: {
       title: string;
+      /**
+       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       */
       image: number | Media;
+    };
+    item8: {
+      title: string;
+      /**
+       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       */
+      image: number | Media;
+      /**
+       * Optional link for this full-width block.
+       */
+      href?: string | null;
     };
   };
   updatedAt?: string | null;
@@ -578,6 +615,13 @@ export interface HomeSelect<T extends boolean = true> {
           | {
               title?: T;
               image?: T;
+            };
+        item8?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+              href?: T;
             };
       };
   updatedAt?: T;

@@ -22,7 +22,16 @@ export const Home: GlobalConfig = {
           type: 'group',
           fields: [
             { name: 'title', label: 'Text', type: 'text', required: true },
-            { name: 'image', label: 'Image', type: 'upload', relationTo: 'media', required: true },
+            {
+              name: 'image',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+              },
+            },
           ],
         },
         {
@@ -31,7 +40,16 @@ export const Home: GlobalConfig = {
           type: 'group',
           fields: [
             { name: 'title', label: 'Text', type: 'text', required: true },
-            { name: 'image', label: 'Image', type: 'upload', relationTo: 'media', required: true },
+            {
+              name: 'image',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+              },
+            },
           ],
         },
         {
@@ -40,7 +58,16 @@ export const Home: GlobalConfig = {
           type: 'group',
           fields: [
             { name: 'title', label: 'Text', type: 'text', required: true },
-            { name: 'image', label: 'Image', type: 'upload', relationTo: 'media', required: true },
+            {
+              name: 'image',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+              },
+            },
           ],
         },
         {
@@ -49,7 +76,16 @@ export const Home: GlobalConfig = {
           type: 'group',
           fields: [
             { name: 'title', label: 'Text', type: 'text', required: true },
-            { name: 'image', label: 'Image', type: 'upload', relationTo: 'media', required: true },
+            {
+              name: 'image',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+              },
+            },
           ],
         },
         {
@@ -58,7 +94,16 @@ export const Home: GlobalConfig = {
           type: 'group',
           fields: [
             { name: 'title', label: 'Text', type: 'text', required: true },
-            { name: 'image', label: 'Image', type: 'upload', relationTo: 'media', required: true },
+            {
+              name: 'image',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+              },
+            },
           ],
         },
         {
@@ -67,7 +112,16 @@ export const Home: GlobalConfig = {
           type: 'group',
           fields: [
             { name: 'title', label: 'Text', type: 'text', required: true },
-            { name: 'image', label: 'Image', type: 'upload', relationTo: 'media', required: true },
+            {
+              name: 'image',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+              },
+            },
           ],
         },
         {
@@ -76,7 +130,44 @@ export const Home: GlobalConfig = {
           type: 'group',
           fields: [
             { name: 'title', label: 'Text', type: 'text', required: true },
-            { name: 'image', label: 'Image', type: 'upload', relationTo: 'media', required: true },
+            {
+              name: 'image',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+              },
+            },
+          ],
+        },
+        {
+          name: 'item8',
+          label: 'Block 8',
+          type: 'group',
+          fields: [
+            { name: 'title', label: 'Text', type: 'text', required: true },
+            {
+              name: 'image',
+              label: 'Media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+              },
+            },
+            {
+              name: 'href',
+              label: 'Link',
+              type: 'text',
+              required: false,
+              admin: {
+                placeholder: '/new-page',
+                description: 'Optional link for this full-width block.',
+              },
+            },
           ],
         },
       ],
