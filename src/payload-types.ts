@@ -245,6 +245,29 @@ export interface Page {
           }
         | {
             /**
+             * Add render cards with one main image and extra gallery images for the modal.
+             */
+            items?:
+              | {
+                  mainImage: number | Media;
+                  /**
+                   * Additional views that open in the gallery modal.
+                   */
+                  gallery?:
+                    | {
+                        image: number | Media;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'renders';
+          }
+        | {
+            /**
              * Disclaimer text to show in the Read more area
              */
             text: string;
@@ -444,6 +467,24 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        renders?:
+          | T
+          | {
+              items?:
+                | T
+                | {
+                    mainImage?: T;
+                    gallery?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
                     id?: T;
                   };
               id?: T;

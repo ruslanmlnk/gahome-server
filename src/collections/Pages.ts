@@ -136,6 +136,47 @@ const Pages: CollectionConfig = {
           ],
         },
         {
+          slug: 'renders',
+          labels: { singular: 'Renders block', plural: 'Renders blocks' },
+          fields: [
+            {
+              name: 'items',
+              label: 'Renders',
+              type: 'array',
+              minRows: 1,
+              fields: [
+                {
+                  name: 'mainImage',
+                  label: 'Main image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+                {
+                  name: 'gallery',
+                  label: 'Gallery images',
+                  type: 'array',
+                  fields: [
+                    {
+                      name: 'image',
+                      label: 'Image',
+                      type: 'upload',
+                      relationTo: 'media',
+                      required: true,
+                    },
+                  ],
+                  admin: {
+                    description: 'Additional views that open in the gallery modal.',
+                  },
+                },
+              ],
+              admin: {
+                description: 'Add render cards with one main image and extra gallery images for the modal.',
+              },
+            },
+          ],
+        },
+        {
           slug: 'disclaimer',
           labels: { singular: 'Disclaimer', plural: 'Disclaimers' },
           fields: [
