@@ -47,4 +47,14 @@ export default buildConfig({
     payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
+  upload: {
+    limits: {
+      fileSize: 4 * 1024 * 1024 * 1024, // 4 GB
+    },
+    abortOnLimit: true,   // щоб було 413, а не "мовчки щось відбувається"
+    useTempFiles: true,   // не тримати 2.8 GB у RAM
+    tempFileDir: '/tmp/payload',
+    uploadTimeout: 0,     // або велике число, щоб не обривалось по 60s
+    debug: true,
+  },
 })
