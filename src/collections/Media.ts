@@ -81,20 +81,6 @@ export const Media: CollectionConfig = {
         condition: (_, siblingData) =>
           typeof siblingData?.mimeType === 'string' && siblingData.mimeType.startsWith('video/'),
       },
-      validate: (
-        value: unknown,
-        { siblingData }: { siblingData?: { mimeType?: string | null } },
-      ) => {
-        if (
-          typeof siblingData?.mimeType === 'string' &&
-          siblingData.mimeType.startsWith('video/') &&
-          !value
-        ) {
-          return 'Poster is required for video files.'
-        }
-
-        return true
-      },
     },
   ],
 }
