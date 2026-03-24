@@ -8,6 +8,11 @@ const __dirname = path.dirname(__filename)
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Your Next.js config here
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '4000mb',
+    },
+  },
   async headers() {
     return [
       {
