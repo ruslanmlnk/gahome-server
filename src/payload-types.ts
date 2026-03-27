@@ -302,6 +302,20 @@ export interface Page {
           }
         | {
             /**
+             * Optional label used for accessibility and alt text.
+             */
+            title?: string | null;
+            youtubeUrl: string;
+            /**
+             * Poster image shown before the YouTube video starts.
+             */
+            poster: number | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'video';
+          }
+        | {
+            /**
              * Disclaimer text to show in the Read more area
              */
             text: string;
@@ -568,6 +582,15 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        video?:
+          | T
+          | {
+              title?: T;
+              youtubeUrl?: T;
+              poster?: T;
+              id?: T;
+              blockName?: T;
+            };
         disclaimer?:
           | T
           | {
@@ -644,7 +667,11 @@ export interface Home {
     item1: {
       title: string;
       /**
-       * Choose an image or a video. For videos, set the poster inside the selected Media item.
+       * Optional. If set, the selected media below will be used as the poster image for the YouTube video.
+       */
+      youtubeUrl?: string | null;
+      /**
+       * Choose an image or a video. If a YouTube URL is set above, this media will be used as the poster image.
        */
       image: number | Media;
     };
@@ -723,6 +750,7 @@ export interface HomeSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              youtubeUrl?: T;
               image?: T;
             };
         item2?:

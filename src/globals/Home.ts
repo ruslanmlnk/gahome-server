@@ -23,13 +23,25 @@ export const Home: GlobalConfig = {
           fields: [
             { name: 'title', label: 'Text', type: 'text', required: true },
             {
+              name: 'youtubeUrl',
+              label: 'YouTube URL',
+              type: 'text',
+              required: false,
+              admin: {
+                placeholder: 'https://www.youtube.com/watch?v=...',
+                description:
+                  'Optional. If set, the selected media below will be used as the poster image for the YouTube video.',
+              },
+            },
+            {
               name: 'image',
-              label: 'Media',
+              label: 'Poster / Media',
               type: 'upload',
               relationTo: 'media',
               required: true,
               admin: {
-                description: 'Choose an image or a video. For videos, set the poster inside the selected Media item.',
+                description:
+                  'Choose an image or a video. If a YouTube URL is set above, this media will be used as the poster image.',
               },
             },
           ],

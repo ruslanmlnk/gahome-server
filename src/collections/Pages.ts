@@ -177,6 +177,38 @@ const Pages: CollectionConfig = {
           ],
         },
         {
+          slug: 'video',
+          labels: { singular: 'Video block', plural: 'Video blocks' },
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: false,
+              admin: {
+                description: 'Optional label used for accessibility and alt text.',
+              },
+            },
+            {
+              name: 'youtubeUrl',
+              label: 'YouTube URL',
+              type: 'text',
+              required: true,
+              admin: {
+                placeholder: 'https://www.youtube.com/watch?v=...',
+              },
+            },
+            {
+              name: 'poster',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                description: 'Poster image shown before the YouTube video starts.',
+              },
+            },
+          ],
+        },
+        {
           slug: 'disclaimer',
           labels: { singular: 'Disclaimer', plural: 'Disclaimers' },
           fields: [
