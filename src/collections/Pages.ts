@@ -181,14 +181,6 @@ const Pages: CollectionConfig = {
           labels: { singular: 'Video block', plural: 'Video blocks' },
           fields: [
             {
-              name: 'title',
-              type: 'text',
-              required: false,
-              admin: {
-                description: 'Optional label used for accessibility and alt text.',
-              },
-            },
-            {
               name: 'youtubeUrl',
               label: 'YouTube URL',
               type: 'text',

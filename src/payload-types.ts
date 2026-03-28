@@ -301,10 +301,6 @@ export interface Page {
             blockType: 'renders';
           }
         | {
-            /**
-             * Optional label used for accessibility and alt text.
-             */
-            title?: string | null;
             youtubeUrl: string;
             /**
              * Poster image shown before the YouTube video starts.
@@ -585,7 +581,6 @@ export interface PagesSelect<T extends boolean = true> {
         video?:
           | T
           | {
-              title?: T;
               youtubeUrl?: T;
               poster?: T;
               id?: T;
