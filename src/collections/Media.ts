@@ -25,6 +25,13 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: 'media',
     adminThumbnail: 'thumbnail',
+    modifyResponseHeaders: ({ headers }) => {
+      const nextHeaders = new Headers(headers)
+
+      nextHeaders.set('Cache-Control', 'public, max-age=2678400, s-maxage=2678400, stale-while-revalidate=86400, immutable')
+
+      return nextHeaders
+    },
     formatOptions: {
       format: 'webp',
       options: {
